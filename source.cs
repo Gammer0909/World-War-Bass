@@ -214,7 +214,7 @@ namespace WWB //World War Bass
             int tax = TaxCollection(resources, taxDoubler, incomeBonus); //calling TaxCollection method and giving it the values for resources, taxDoubler, and incomeBonus
             resources = resources + tax;
             Console.Write("\nYou now have " + resources + " resources because of taxes!");
-            String[] usethis = { "U.S", "U.K", "Germany", "France", "Russia", "None"};
+            String[] usethis = { "U.S", "U.K", "Germany", "France", "Russia", "None"}; //called usethis because it is the values used in countryList
             List<string> countryList = new List<string>(usethis); //making a new list named countryList and giving it all the values from usethis
             countryList.Remove(countryPicked);
             Console.WriteLine(string.Join("\n", countryList));
@@ -238,7 +238,14 @@ namespace WWB //World War Bass
                 
                 SendTroops(troops, whosGettingAttacked);
                 
+            } else if (!areAttacking)
+            {
+
+                Console.Write("Because " + countryPicked + " is not attacking anyone, they get a turn to rally their troops, and get +5 from drafts.\n");
+                troops += 5;
+
             }
+            
             
         }
         
