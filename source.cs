@@ -7,15 +7,15 @@ using System.IO;
 //For Mr. Bass' class 5th Hour
 
 
-/******************************************************************************************************************
+/****************************************************************************************************************************************************************************************************************************************************************************************************************************
 
 1: stands for: shouldTheyBeAlerted. This variable tells the system weather contries are already alerted or not.
 
 2: Stands for peaceOrWar. This indexes to see if we are in peace or war.
 
+3: This Method may seem like all it does is get the new number of troops, which could be done either in main or in the previous method used. But, you cannot return more than one value from a method, and I needed the value of troops that are being sent, so that way I could use it in attacking calculation and logic.
 
-
-*******************************************************************************************************************/
+****************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
 
 namespace WWB //World War Bass
@@ -236,7 +236,10 @@ namespace WWB //World War Bass
             if (areAttacking)
             {
                 
-                SendTroops(troops, whosGettingAttacked);
+                var Main_amountOfTroopsBeingSent = SendTroops(troops, whosGettingAttacked);
+                GetTroopsRemaning(troops, Main_amountOfTroopsBeingSent);
+                Console.Write("You have " + troops + " troops remaning.\n");
+                AttackLogic(troops, whosGettingAttacked, Main_amountOfTroopsBeingSent, countryList);
                 
             } else if (!areAttacking)
             {
@@ -249,6 +252,37 @@ namespace WWB //World War Bass
             
         }
         
+        public static int AttackLogic(int troops, string attackee, int troopsBeingSent)
+        {
+            Random howManyTroopsAttackeeHas = new Random();
+            int defenderTroopCount = howManyTroopsAttackeeHas.Next(6, 16);
+            Console.Write("The country " + attackee + " has " + defenderTroopCount + " troops.");
+            if (troopsBeingSent > defenderTroopCount)
+            {
+                troopsBeingSent -= defenderTroopCount - 5; //sets the amount of troops being sent to the defender troop count -5.
+                Console.Write("You had more troops than " + attackee + "! They saw your mass amounts of numbers comapared to theirs, and lost because their morale was so low.\n");
+                if (troopsBeingSent > 5)
+                {
+
+                    Console.Write("You had so many troops, that the rest of " + attackee + "'s ragged army fell like a house of cards. You have taken over " + attackee + "!\n")
+
+                }
+
+            }
+
+
+
+        }
+
+
+        public static int GetTroopsRemaning(int troops, int _troopsBeingSent) //Don't worry. This Method isn't useless. See note 3.
+        {
+
+            troops -= troopsBeingSent;
+            return troops;
+
+        }
+
         public static int SendTroops(int troops, string attackee)
         {
             
@@ -257,8 +291,7 @@ namespace WWB //World War Bass
             if (troops > troopsToBeSent)
             {
             Console.Write("You will send " + troopsToBeSent + " to attack " + attackee + ".");
-            troops -= troopsToBeSent;
-            return troops;
+            return troopsToBeSent;
             } else 
             {
                 
