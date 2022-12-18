@@ -20,7 +20,7 @@ using System.IO;
 
 namespace WWB //World War Bass
 {
-    class Bass
+    class source
     {
         public int yearPicked; //the year that the user picks
         public static void Main(string[] args)
@@ -244,7 +244,7 @@ namespace WWB //World War Bass
             } else if (!areAttacking)
             {
 
-                Console.Write("Because " + countryPicked + " is not attacking anyone, they get a turn to rally their troops, and get +5 from drafts.\n");
+                Console.Write("Because " + countryPicked + " is not attacking anyone, they get a turn to rally their troops, and get +5 troops from drafts.\n");
                 troops += 5;
 
             }
@@ -252,7 +252,7 @@ namespace WWB //World War Bass
             
         }
         
-        public static int AttackLogic(int troops, string attackee, int troopsBeingSent)
+        public static bool AttackLogic(int troops, string attackee, int troopsBeingSent)
         {
             Random howManyTroopsAttackeeHas = new Random();
             int defenderTroopCount = howManyTroopsAttackeeHas.Next(6, 16);
@@ -260,12 +260,19 @@ namespace WWB //World War Bass
             if (troopsBeingSent > defenderTroopCount)
             {
                 troopsBeingSent -= defenderTroopCount - 5; //sets the amount of troops being sent to the defender troop count -5.
+                bool win;
                 Console.Write("You had more troops than " + attackee + "! They saw your mass amounts of numbers comapared to theirs, and lost because their morale was so low.\n");
                 if (troopsBeingSent > 5)
                 {
 
-                    Console.Write("You had so many troops, that the rest of " + attackee + "'s ragged army fell like a house of cards. You have taken over " + attackee + "!\n")
+                    Console.Write("You had so many troops, that the rest of " + attackee + "'s ragged army fell like a house of cards. You have taken over " + attackee + "!\n");
+                    win = true;
+                    return win;
+                } else
+                {
 
+                    Console.Write("You may have won the battle, but " + attackee + " has more troops, so you had to pull out.");
+                    return false;
                 }
 
             }
