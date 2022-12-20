@@ -260,24 +260,24 @@ namespace WWB //World War Bass
             if (troopsBeingSent > defenderTroopCount)
             {
                 troopsBeingSent -= defenderTroopCount - 5; //sets the amount of troops being sent to the defender troop count -5.
-                bool win;
+                bool winWar;
                 Console.Write("You had more troops than " + attackee + "! They saw your mass amounts of numbers comapared to theirs, and lost because their morale was so low.\n");
                 if (troopsBeingSent > 5)
                 {
 
                     Console.Write("You had so many troops, that the rest of " + attackee + "'s ragged army fell like a house of cards. You have taken over " + attackee + "!\n");
-                    win = true;
+                    winWar = true;
                     return win;
                 } else
                 {
                         
                     Console.Write("You may have won the battle, but " + attackee + " has more troops, so you had to pull out.");
-                    return false;
+                    winWar = false
+                    return winWar;
                 }
+                return false; //should never happen, just appeasing our god the compiler
 
             }
-
-
 
         }
 
