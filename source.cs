@@ -272,7 +272,7 @@ namespace WWB //World War Bass
                 {
                         
                     Console.Write("You may have won the battle, but " + attackee + " has more troops, so you had to pull out.");
-                    winWar = false
+                    winWar = false;
                     return winWar;
                 }
                 return false; //should never happen, just appeasing our god the compiler
