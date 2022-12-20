@@ -252,7 +252,7 @@ namespace WWB //World War Bass
             
         }
         
-        public static bool AttackLogic(int troops, string attackee, int troopsBeingSent)
+        public static bool AttackLogic(int troops, string attackee, int troopsBeingSent, List<string> countryList_)
         {
             Random howManyTroopsAttackeeHas = new Random();
             int defenderTroopCount = howManyTroopsAttackeeHas.Next(6, 16);
@@ -270,7 +270,7 @@ namespace WWB //World War Bass
                     return win;
                 } else
                 {
-
+                        
                     Console.Write("You may have won the battle, but " + attackee + " has more troops, so you had to pull out.");
                     return false;
                 }
