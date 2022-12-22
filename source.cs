@@ -241,6 +241,7 @@ namespace WWB //World War Bass
                 Console.Write("You have " + troops + " troops remaning.\n");
                 bool didWeWin = AttackLogic(troops, whosGettingAttacked, Main_amountOfTroopsBeingSent, countryList);
                 
+                
 
                 
             } else if (!areAttacking)
@@ -253,6 +254,7 @@ namespace WWB //World War Bass
             
             
         }
+        public static List<string>
         
         public static bool AttackLogic(int troops, string attackee, int troopsBeingSent, List<string> countryList_)
         {
@@ -261,23 +263,28 @@ namespace WWB //World War Bass
             Console.Write("The country " + attackee + " has " + defenderTroopCount + " troops.");
             if (troopsBeingSent > defenderTroopCount) //If the troops that the player sent is higher than the randomly generated defenderTroopCount then..
             {
-                troopsBeingSent -= defenderTroopCount - 5; //sets the amount of troops being sent to the defender troop count -5.
-                bool winWar;
+                troopsBeingSent -= defenderTroopCount - 5; //set the amount of troops being sent to the defender troop count -5.
+                bool winWar; //declare a boolean var called winWar
                 Console.Write("You had more troops than " + attackee + "! They saw your mass amounts of numbers comapared to theirs, and lost because their morale was so low.\n");
-                if (troopsBeingSent > 5)
+                if (troopsBeingSent > 5) //if the troops the player sent is still above 5 after the subtraction then....
                 {
 
                     Console.Write("You had so many troops, that the rest of " + attackee + "'s ragged army fell like a house of cards. You have taken over " + attackee + "!\n");
-                    winWar = true;
-                    return win;
+                    winWar = true; //set winWar to true
+                    return winWar; //return winWar back to Main()
                 } else
                 {
                         
                     Console.Write("You may have won the battle, but " + attackee + " has more troops, so you had to pull out.");
-                    winWar = false;
-                    return winWar;
+                    winWar = false; //set winWar to false
+                    return winWar; //return winWar back to Main()
                 }
                 return false; //should never happen, just appeasing our god the compiler
+
+            } else
+            {
+                Console.WriteLine("You did not have enough troops to win this battle, and lost all the troops you sent.\n");
+
 
             }
 
