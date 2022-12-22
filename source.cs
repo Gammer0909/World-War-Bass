@@ -239,7 +239,9 @@ namespace WWB //World War Bass
                 var Main_amountOfTroopsBeingSent = SendTroops(troops, whosGettingAttacked);
                 GetTroopsRemaning(troops, Main_amountOfTroopsBeingSent);
                 Console.Write("You have " + troops + " troops remaning.\n");
-                AttackLogic(troops, whosGettingAttacked, Main_amountOfTroopsBeingSent, countryList);
+                bool didWeWin = AttackLogic(troops, whosGettingAttacked, Main_amountOfTroopsBeingSent, countryList);
+                
+
                 
             } else if (!areAttacking)
             {
@@ -254,10 +256,10 @@ namespace WWB //World War Bass
         
         public static bool AttackLogic(int troops, string attackee, int troopsBeingSent, List<string> countryList_)
         {
-            Random howManyTroopsAttackeeHas = new Random();
-            int defenderTroopCount = howManyTroopsAttackeeHas.Next(6, 16);
+            Random howManyTroopsAttackeeHas = new Random(); //new random class
+            int defenderTroopCount = howManyTroopsAttackeeHas.Next(6, 16); //setting the defender's troop count to a random value between 5 and 15
             Console.Write("The country " + attackee + " has " + defenderTroopCount + " troops.");
-            if (troopsBeingSent > defenderTroopCount)
+            if (troopsBeingSent > defenderTroopCount) //If the troops that the player sent is higher than the randomly generated defenderTroopCount then..
             {
                 troopsBeingSent -= defenderTroopCount - 5; //sets the amount of troops being sent to the defender troop count -5.
                 bool winWar;
