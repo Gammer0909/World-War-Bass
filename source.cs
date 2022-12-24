@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 
-//this code is (C) Kyle Garzon 2022
+
 //For Mr. Bass' class 5th Hour
 
 
