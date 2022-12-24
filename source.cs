@@ -254,6 +254,15 @@ namespace WWB //World War Bass
             
             
         }
+        
+        public static string WhichCountryFighting(List<string> countryList)
+        {
+
+            Random rng = new Random();
+            
+
+
+        }
 
         
 
@@ -305,6 +314,7 @@ namespace WWB //World War Bass
             } else
             {
                 Console.WriteLine("You did not have enough troops to win this battle, and lost all the troops you sent.\n");
+                return false;
 
 
             }
@@ -315,7 +325,7 @@ namespace WWB //World War Bass
         public static int GetTroopsRemaning(int troops, int _troopsBeingSent) //Don't worry. This Method isn't useless. See note 3.
         {
 
-            troops -= troopsBeingSent;
+            troops -= _troopsBeingSent;
             return troops;
 
         }
