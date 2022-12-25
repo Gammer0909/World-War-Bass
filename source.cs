@@ -213,11 +213,10 @@ namespace WWB //World War Bass
             Console.Write("\nThe pre-turn is over!\nNow, time to collect your taxes.");
             int tax = TaxCollection(resources, taxDoubler, incomeBonus); //calling TaxCollection method and giving it the values for resources, taxDoubler, and incomeBonus
             resources = resources + tax;
-            Console.Write("\nYou now have " + resources + " resources because of taxes!");
+            Console.Write("\nYou now have " + resources + " resources because of taxes!\n");
             String[] usethis = { "U.S", "U.K", "Germany", "France", "Russia", "None"}; //called usethis because it is the values used in countryList
             List<string> countryList = new List<string>(usethis); //making a new list named countryList and giving it all the values from usethis
             countryList.Remove(countryPicked);
-            Console.WriteLine(string.Join("\n", countryList));
             Console.Write("\nNow, for the attacking turn. There are four other countries to attack, they are-\n" + string.Join("\n", countryList)); //displaying attackable countries
             var whosGettingAttacked = GetAttack(countryList, troops);
             bool areAttacking;
@@ -240,8 +239,11 @@ namespace WWB //World War Bass
                 GetTroopsRemaning(troops, Main_amountOfTroopsBeingSent);
                 Console.Write("You have " + troops + " troops remaning.\n");
                 bool didWeWin = AttackLogic(troops, whosGettingAttacked, Main_amountOfTroopsBeingSent);
-                countryList = WhoLost(countryList, whosGettingAttacked, didWeWin);
-                string whosFighting = wdwWhichCountryFighting(countryList);
+                troops -= Main_troopsBeingSent;
+                countryList = WhoLost(countryList, whosGettingAttacked, didWeWin);               //the three method calls in a row xd
+                string whosFighting = WhichCountryFighting(countryList);
+
+                
                 
 
                 
@@ -253,6 +255,33 @@ namespace WWB //World War Bass
 
             }
             
+            public static bool EnemyAttackLogic(string attacker, int troops, string playerCountry)
+            {
+                //todo: pick return type xd
+                Random rng = new Random();
+                int attackerTroops = rng.Next(0, 16);
+                if (troops > attackerTroops)
+                {
+
+                    Console.WriteLine("You were attacked by " + attacker + "!\n But, you had enough troops to take out their army.");
+                    return false;
+
+
+                } else
+                {
+
+                    Console.WriteLine("You were attacked by " + attacker + ".\nSadly, you did not win the battle, and your army was destroyed.\n");
+                    Console.WriteLine(playerCountry + " has been doomed to death by " + attacker + ".\n");
+                    return true;
+
+
+                }
+                
+                
+
+            }
+
+
             
         }
         
