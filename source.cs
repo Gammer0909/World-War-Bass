@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 
 
 //For Mr. Bass' class 5th Hour
@@ -241,6 +241,7 @@ namespace WWB //World War Bass
                 Console.Write("You have " + troops + " troops remaning.\n");
                 bool didWeWin = AttackLogic(troops, whosGettingAttacked, Main_amountOfTroopsBeingSent);
                 countryList = WhoLost(countryList, whosGettingAttacked, didWeWin);
+                string whosFighting = wdwWhichCountryFighting(countryList);
                 
 
                 
@@ -259,7 +260,9 @@ namespace WWB //World War Bass
         {
 
             Random rng = new Random();
-            
+            int listLength = countryList.Count;
+            string countryChosen = countryList.ElementAt(rng.Next(0, listLength));
+            return countryChosen;
 
 
         }
