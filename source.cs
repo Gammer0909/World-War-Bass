@@ -1,432 +1,440 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Collections.Generic;
+using System.Threading;
 
+//This game idea and the code are (c) Kyle Garzon 2022 / 2023
 
-//For Mr. Bass' class 5th Hour
+/*
+ * This program was used to teach myself Object-Oriented Design principles, or SOLID
+ * (https://en.wikipedia.org/wiki/SOLID) as well as how to properly make a functioning program/application with
+ * with OOP principles.
+ * If you wish to use this as an example or teach with it, contact me on GitHub @Gammer0909
+ *
+ */
 
+//This is a refactor (MAJOR REFACTOR) of a project for my 5th hour
 
-/****************************************************************************************************************************************************************************************************************************************************************************************************************************
-
-1: stands for: shouldTheyBeAlerted. This variable tells the system weather contries are already alerted or not.
-
-2: Stands for peaceOrWar. This indexes to see if we are in peace or war.
-
-3: This Method may seem like all it does is get the new number of troops, which could be done either in main or in the previous method used. But, you cannot return more than one value from a method, and I needed the value of troops that are being sent, so that way I could use it in attacking calculation and logic.
-
-****************************************************************************************************************************************************************************************************************************************************************************************************************************/
-
-
-namespace WWB //World War Bass
-{
-    class source
+class Game
+{   
+    public string countryPicked;
+    public bool defended = false;
+    public int countryNumber;
+    public static int troopCount = 0;
+    public int hateFactor = 0;
+    public int money = 10;
+    public int taxPercentage = 0;
+    public int domesticHateFactor = 0;
+    public string[] otherCountriesOwned = {}; 
+    public static string[] countryArray = {"United States", "United Kingdom", "Russia", "France"};
+    public static int[] countryTroopArray = {10, 10, 15, 5};
+    public List<string> countryList = new List<string>(countryArray);
+    public List<int> countryTroopList = new List<int>(countryTroopArray);
+    
+    public void Initialize(string country)
     {
-        public int yearPicked; //the year that the user picks
-        public static void Main(string[] args)
+        
+        countryPicked = country;
+        switch(country)
         {
-
-            int sTBA = 0; //see note 1
-            int incomeBonus = 0;
-            Console.Write("What year is this battle taking place?\n(1938-1945, 1990-2015, 2030-2050, somewhere in between those years.): ");
-            int yearPicked = Convert.ToInt32(Console.ReadLine());
-            if (yearPicked >= 1938 && yearPicked <= 1945) //is yearPicked bigger than 1938 but smaller than 1945?
-            {
-
-                Console.Write("\nThe battle will be set in WWII (World War Two)");
-                sTBA = 0;
-
-            }
-            else if (yearPicked >= 1990 && yearPicked <= 2015) //is yearPicked bigger than 1990, but smaller than 2015?
-            {
-
-                Console.Write("\nThe battle will be set in during the US' war on terrorism.");
-                sTBA = 0;
-
-            }
-            else if (yearPicked >= 2030 && yearPicked <= 2050) //is yearPicked bigger than 2030, but smaller than 2050?
-            {
-
-                Console.Write("\nThe battle will be set in the future.");
-                Console.Write("\nIs there currently a battle going on in this future? [Yes/No]: ");
-                string yesNo = Console.ReadLine();
-                if (yesNo == "yes" || yesNo == "Yes")
-                {
-
-                    Console.Write("It is the year " + yearPicked + ". War is raging, and people are dying everywhere.");
-                    sTBA = 0;
-
-                }
-                else if (yesNo == "no" || yesNo == "No")
-                {
-
-                    Console.Write("It is the year " + yearPicked + " and times are very peaceful. Natural Resources are able to be synthesised. Automatic +5 Resources per round.");
-                    sTBA = 1;
-                    incomeBonus = 5;
-                }
-
-
-
-
-            }
-            else
-            {
-
-                Console.Write("No major wars were fought then, so it will be a time of peace.");
-                sTBA = 1;
-            }
-
-
-            //end of the if nest haha
-
-            string[] pW = { "war", "peace" }; //note 2
-            if (sTBA == 0) //war 
-            {
-
-                string warOrPeace = pW[0];
-                Console.Write("\nBecause it's a time of war, contries are prepared. If you wish to invade someone, you can do so, you do not have to declare war or prepare.");
-                Console.Write("\n\nPress any key when you are ready.");
-                Console.ReadKey();
-            }
-            else if (sTBA == 1) //peace
-            {
-
-                string warOrPeace = pW[1];
-                Console.Write("\nBecause it's a time of peace, no contries are prepared, and neither are you. You must declare war and prep before you attack, as do all the other contries.");
-                Console.Write("\n\nPress any key when you are ready.");
-                Console.ReadKey();
-            }
-
-            string whichCountry;
-            int resources = 0;
-            int troops = 0;
-            string countryPicked = "temp";
-            Console.Write("\nNow, let's pick your country.\nYou can pick from 5 Different countries-\nThe U.S.A\nThe U.K\nGermany\nFrance\nRussia\nWhich country do you want: ");
-            whichCountry = Console.ReadLine();
-            if (whichCountry == "The U.S.A" || whichCountry == "us" || whichCountry == "the us" || whichCountry == "u.s.a" || whichCountry == "the u.s.a" || whichCountry == "the U.S.A") //what does the user input?
-            {
-
-                Console.Write("\nThe U.S.A has a big army, and a good economy.\nYou start with more resources and troops. +100 Troops and +20 Resources.");
-                resources = 20;
-                troops = 100;
-                countryPicked = "U.S";
-            }
-            else if (whichCountry == "The U.K" || whichCountry == "the uk" || whichCountry == "britain" || whichCountry == "the uk" || whichCountry == "uk" || whichCountry == "no queen") //what does the user input?
-            {
-
-                Console.Write("\nThe U.K has a large army, and a decent economy.\nYou start with +50 troops and +15 Resources.");
-                resources = 15;
-                troops = 50;
-                countryPicked = "U.K";
-            }
-            else if (whichCountry == "Germany" || whichCountry == "germany" || whichCountry == "nazis" || whichCountry == "Nazi germany" || whichCountry == "nazi germany") //what does the user input?
-            {
-
-                Console.Write("\nGermany has a very small army, but the economy is bustling along.\nYou start with +10 troops and +50 resources.");
-                resources = 50;
-                troops = 10;
-                countryPicked = "Germany";
-
-
-            }
-            else if (whichCountry == "France" || whichCountry == "france" || whichCountry == "baguette" || whichCountry == "useless" || whichCountry == "white flag" || whichCountry == "losers" || whichCountry == "lmao imagine losing to germany") //what does the user input?
-            {
-
-                Console.Write("\nFrance has a medium sized army, and a good economy.\nYou start with +15 Troops and +30 resources.");
-                troops = 15;
-                resources = 30;
-                countryPicked = "France";
-                
-            }
-            else if (whichCountry == "Russia" || whichCountry == "russia" || whichCountry == "thicc place") //what does the user input?
-            {
-
-                Console.Write("\nRussia has a very, very large army and a decent economy.\n+You start with +150 troops and +25 resources.");
-                troops = 150;
-                resources = 25;
-                countryPicked = "Russia"; 
-            }
-            else
-            {
-
-                Console.WriteLine("That country was not a part of the list.");
-                Console.WriteLine("Press any key to close the console.");
-                Console.ReadKey();
-                System.Environment.Exit(0);
-
-
-            }
-
-            Console.Write("\n\nYou have " + troops + " troops and " + resources + " resources.\nTroops keep your country safe, and also help you attack others.\nIf you have more than half your troops in your country at once, then you have a higher chance of beating off an enemy attack.\n\nResources can get you more troops, for varing cost for how well trained they are.\n");
-            Console.Write("Here's the run-down of the World War Bass-\nYou have troops and resources, which you can use to defend yourself, and also buy troops.\nEvery turn you have the option to move troops, buy troops, or attack someone.\n\nAlso, after you are done with your turn, other countries do random things. This can mean drafting lots of troops, moving them to a front, etc.\nIf you are in a time of war, then all countries are on edge, and the slightest thing can set them off, so be careful.");
-
-            Console.Write("Now, what would you like to do?\nDRAFT\nBUY TROOPS\nRAISE TAXES\n");
-
-            string input;
-            int taxDoubler = 1;
-            input = Console.ReadLine();
-            if (input == "DRAFT" || input == "draft" || input == "dRaFt" || input == "DrAfT" || input == "dRAFT") //what does the user input?
-            {
-
-                int draftTroops = Draft(troops); //see note 3
-                troops = troops + draftTroops;
-                Console.Write("Drafting Troops....\n\n" + "because of the draft, you now have " + troops + " troops!\n");
-                taxDoubler = 1;
-
-
-            }
-            else if (input == "BUY TROOPS" || input == "buy troops" || input == "Buy Troops") //checking user input
-            {
-                Console.Write("\nHow many troops would you like to buy? (Each Troop is 4 resources)\nYou have " + resources + " resources" + "\nPurchase amount-");
-                int purchaseTroops = Convert.ToInt32(Console.ReadLine());
-                if (resources >= 4 * purchaseTroops)
-                {
-
-                    resources -= purchaseTroops * 4;
-                    Console.WriteLine("\nYou have " + resources + " resources left.\nYou also now have " + troops + " troops.\n");
-
-                }
-                else
-                {
-
-                    Console.Write("Not enough Money. Try again next turn.\n");
-
-                }
-
-
-            }
-            else if (input == "raise taxes" || input == "Raise Taxes" || input == "RAISE TAXES" || input == "sudo raise-taxes") //user input again
-            {
-
-                Console.Write("You will gain double your income at the end of the pre-turn.\n");
-                taxDoubler = 2;
-
-
-            } else
-            {
-
-
-                Console.Write("The president of <your country here> sat on their butt and did nothing.\n");
-                
-            }
-
-            Console.Write("\nThe pre-turn is over!\nNow, time to collect your taxes.");
-            int tax = TaxCollection(resources, taxDoubler, incomeBonus); //calling TaxCollection method and giving it the values for resources, taxDoubler, and incomeBonus
-            resources = resources + tax;
-            Console.Write("\nYou now have " + resources + " resources because of taxes!\n");
-            String[] usethis = { "U.S", "U.K", "Germany", "France", "Russia", "None"}; //called usethis because it is the values used in countryList
-            List<string> countryList = new List<string>(usethis); //making a new list named countryList and giving it all the values from usethis
-            countryList.Remove(countryPicked);
-            Console.Write("\nNow, for the attacking turn. There are four other countries to attack, they are-\n" + string.Join("\n", countryList)); //displaying attackable countries
-            var whosGettingAttacked = GetAttack(countryList, troops);
-            bool areAttacking;
-            if (whosGettingAttacked == "None")
-            {
-                
-                Console.Write("The country " + countryPicked + " is staying neutral");
-                areAttacking = false;
-                
-            } else
-            {
-                
-                Console.Write("The country " + countryPicked + " is now attacking " + whosGettingAttacked + "!");
-                areAttacking = true;
-            }
-            if (areAttacking)
-            {
-                
-                var Main_amountOfTroopsBeingSent = SendTroops(troops, whosGettingAttacked);
-                GetTroopsRemaning(troops, Main_amountOfTroopsBeingSent);
-                Console.Write("You have " + troops + " troops remaning.\n");
-                bool didWeWin = AttackLogic(troops, whosGettingAttacked, Main_amountOfTroopsBeingSent);
-                troops -= Main_troopsBeingSent;
-                countryList = WhoLost(countryList, whosGettingAttacked, didWeWin);               //the three method calls in a row xd
-                string whosFighting = WhichCountryFighting(countryList);
-
-                
-                
-
-                
-            } else if (!areAttacking)
-            {
-
-                Console.Write("Because " + countryPicked + " is not attacking anyone, they get a turn to rally their troops, and get +5 troops from drafts.\n");
-                troops += 5;
-
-            }
             
-            public static bool EnemyAttackLogic(string attacker, int troops, string playerCountry)
-            {
-                //todo: pick return type xd
-                Random rng = new Random();
-                int attackerTroops = rng.Next(0, 16);
-                if (troops > attackerTroops)
-                {
-
-                    Console.WriteLine("You were attacked by " + attacker + "!\n But, you had enough troops to take out their army.");
-                    return false;
-
-
-                } else
-                {
-
-                    Console.WriteLine("You were attacked by " + attacker + ".\nSadly, you did not win the battle, and your army was destroyed.\n");
-                    Console.WriteLine(playerCountry + " has been doomed to death by " + attacker + ".\n");
-                    return true;
-
-
-                }
-                
-                
-
-            }
-
-
+            case "united states":
+            case "United States":
+                countryList.Remove("United States");
+                countryTroopList.RemoveAt(0);
+                break;
+            case "united kingdom":
+            case "United Kingdom":
+                countryList.Remove("United Kingdom");
+                countryTroopList.RemoveAt(1);
+                break;
+            case "russia":
+            case "Russia":
+                countryList.Remove("Russia");
+                countryTroopList.RemoveAt(2);
+                break;
+            case "france":
+            case "France":
+                countryList.Remove("France");
+                countryTroopList.RemoveAt(4);
+                break;
             
         }
         
-        public static string WhichCountryFighting(List<string> countryList)
-        {
+    }
 
-            Random rng = new Random();
-            int listLength = countryList.Count;
-            string countryChosen = countryList.ElementAt(rng.Next(0, listLength));
-            return countryChosen;
+    public void AttackPrompt(Game game)
+    {
+
+        Console.WriteLine("It is now your attacking turn, you can:");
+        Console.WriteLine("ATTACK\nDEFEND\n[PICK ACTION]: ");
+        string input = Console.ReadLine();
+        switch (input)
+        {
+            case "attack":
+            case "ATTACK":
+                Attack(game);
+                break;
+            case "defend":
+            case "DEFEND":
+                Defend();
+                break;
+            default:
+                Console.WriteLine("Invalid input, try again.");
+                Thread.Sleep(2000);
+                Console.Clear();
+                AttackPrompt(game);
+                break;
 
 
         }
 
-        
+    }
 
-        public static List<string> WhoLost(List<string> countryList, string attackee, bool didPlayerWin)
+
+    public void Attack(Game game)
+    {
+        Console.WriteLine("Pick the country you are attacking: ");
+        foreach (string country in countryList)
         {
-
-            if (didPlayerWin)
-            {
-
-                countryList.Remove(attackee);
-                return countryList;
-
-            } else
-            {
-
-                return countryList;
-
-            }
-            
-
-
+            Console.WriteLine(country);
         }
-        
-        public static bool AttackLogic(int troops, string attackee, int troopsBeingSent)
+        string input = Console.ReadLine();
+        int troopsToSend;
+        string attackee;
+        switch(input)
         {
-            Random howManyTroopsAttackeeHas = new Random(); //new random class
-            int defenderTroopCount = howManyTroopsAttackeeHas.Next(6, 16); //setting the defender's troop count to a random value between 5 and 15
-            Console.Write("The country " + attackee + " has " + defenderTroopCount + " troops.");
-            if (troopsBeingSent > defenderTroopCount) //If the troops that the player sent is higher than the randomly generated defenderTroopCount then..
-            {
-                troopsBeingSent -= defenderTroopCount - 5; //set the amount of troops being sent to the defender troop count -5.
-                bool winWar; //declare a boolean var called winWar
-                Console.Write("You had more troops than " + attackee + "! They saw your mass amounts of numbers comapared to theirs, and lost because their morale was so low.\n");
-                if (troopsBeingSent > 5) //if the troops the player sent is still above 5 after the subtraction then....
-                {
-
-                    Console.Write("You had so many troops, that the rest of " + attackee + "'s ragged army fell like a house of cards. You have taken over " + attackee + "!\n");
-                    winWar = true; //set winWar to true
-                    return winWar; //return winWar back to Main()
-                } else
-                {
-                        
-                    Console.Write("You may have won the battle, but " + attackee + " has more troops, so you had to pull out.");
-                    winWar = false; //set winWar to false
-                    return winWar; //return winWar back to Main()
+            case "United States":
+            case "united states":
+                if (!otherCountriesOwned.Contains("United States")) {
+                    Console.WriteLine("You are attacking " + input + "! How many troops do you want to send? You have " + troopCount + " troops available.");
+                    troopsToSend = Convert.ToInt32(Console.ReadLine());
+                    troopCount -= troopsToSend;
+                    attackee = "United States";
+                    AttackEnemy(attackee, troopsToSend, game);
+                    break;
+                } else {
+                    
+                    Console.WriteLine("You already own that country, try again!");
+                    Attack(game);
+                    
                 }
-                return false; //should never happen, just appeasing our god the compiler
-
-            } else
-            {
-                Console.WriteLine("You did not have enough troops to win this battle, and lost all the troops you sent.\n");
-                return false;
-
-
-            }
-
+                break;
+            case "United Kingdom":
+            case "united kingdom":
+                if (!otherCountriesOwned.Contains("United Kingdom")) {
+                    Console.WriteLine("You are attacking " + input + "! How many troops do you want to send? You have " + troopCount + " troops available.");
+                    troopsToSend = Convert.ToInt32(Console.ReadLine());
+                    troopCount -= troopsToSend;
+                    attackee = "United Kingdom";
+                    AttackEnemy(attackee, troopsToSend, game);
+                    break;
+                } else {
+                    
+                    Console.WriteLine("You already own that country, try again!");
+                    Attack(game);
+                    
+                }
+                break;
+            case "Russia":
+            case "russia":
+                if (!otherCountriesOwned.Contains("Russia")) {
+                    Console.WriteLine("You are attacking " + input + "! How many troops do you want to send? You have " + troopCount + " troops available.");
+                    troopsToSend = Convert.ToInt32(Console.ReadLine());
+                    troopCount -= troopsToSend;
+                    attackee = "Russia";
+                    AttackEnemy(attackee, troopsToSend, game);
+                    break;
+                } else {
+                    
+                    Console.WriteLine("You already own that country, try again!");
+                    Attack(game);
+                    
+                }
+                break;
+            case "France":
+            case "france":
+                if (!otherCountriesOwned.Contains("France")) {
+                    Console.WriteLine("You are attacking " + input + "! How many troops do you want to send? You have " + troopCount + " troops available.");
+                    troopsToSend = Convert.ToInt32(Console.ReadLine());
+                    troopCount -= troopsToSend;
+                    attackee = "France";
+                    AttackEnemy(attackee, troopsToSend, game);
+                    break;
+                } else {
+                    
+                    Console.WriteLine("You already own that country, try again!");
+                    Attack(game);
+                    
+                }
+                break;
+            default:
+                Console.WriteLine("Invalid input, try again.");
+                Thread.Sleep(1500);
+                Console.Clear();
+                Attack(game);
+                break;
         }
-
-
-        public static int GetTroopsRemaning(int troops, int _troopsBeingSent) //Don't worry. This Method isn't useless. See note 3.
+    }
+    
+    public static void AttackEnemy(string atk, int sentTroops, Game game)
+    {
+        int enemyTroopCount = 0;
+        //First get the current troop count of the country you are attacking
+        switch(atk)
         {
-
-            troops -= _troopsBeingSent;
-            return troops;
-
+            case "United States":
+            case "united states":
+                enemyTroopCount = game.countryTroopList[0];
+                break;
+            case "United Kingdom":
+            case "united kingdom":
+                enemyTroopCount = game.countryTroopList[1];
+                break;
+            case "Russia":
+            case "russia":
+                enemyTroopCount = game.countryTroopList[2];
+                break;
+            case "France":
+            case "frace":
+                enemyTroopCount = game.countryTroopList[3];
+                break;
         }
-
-        public static int SendTroops(int troops, string attackee)
+        //attacking Logic
+        if (sentTroops > enemyTroopCount)
         {
             
-            Console.Write("\nHow many troops do you want to send? [You have " + troops + " troops]\nAmount of troops You are sending-");
-            int troopsToBeSent = Convert.ToInt32(Console.ReadLine());
-            if (troops > troopsToBeSent)
-            {
-            Console.Write("You will send " + troopsToBeSent + " to attack " + attackee + ".");
-            return troopsToBeSent;
-            } else 
-            {
-                
-                Console.Write("You do not have enough troops. Please try again next turn.");
-                return 0;
-            }
+            Console.WriteLine("Your massive numbers destroy " + atk + "'s puny troop numbers, and you take the country!");
+            game.otherCountriesOwned[game.otherCountriesOwned.Length - 1] = atk;
+            
+            
+        } else if (sentTroops <= enemyTroopCount)
+        {
+            
+            Console.WriteLine("You've fought them to a standstill! They Will easily crumble if you send more troops next turn.");
+            enemyTroopCount -= sentTroops;
         }
         
-        public static string GetAttack(List<string> otherCountries, int troops)
+    }
+    
+    public void Defend()
+    {
+        defended = true;
+        Console.WriteLine("You defended your country!");
+        
+    }
+
+    public void TurnPrompt()
+    {
+        
+        Console.WriteLine("It is your pre-attack turn, you can:");
+        Console.WriteLine("DRAFT\nRAISE taxes\nBUY troops\nLOWER taxes");
+        Console.WriteLine("Pick action [The capital word]: ");
+        string input = Console.ReadLine();
+        switch (input)
         {
             
-            Console.WriteLine("\nOut of the countries listed, which do you want to attack? (Type 'none' if you do not wish to attack this turn.)\n[TYPE IT EXACTLY AS IT IS WRITTEN!]\n\nCountry you are Attacking- ");
-            string prompt = Console.ReadLine();
-            if (otherCountries.Contains(prompt))
-            {
-                
-                return prompt;
-                
-            } else if (otherCountries.Contains(prompt) && prompt == "None")
-            {
-                
-                
-                string _prompt = "none";
-                return _prompt;
-            }
-            else 
-            {
-                
-                Console.Write("That is not in the list, you lose your attacking turn trying to find the country " + prompt + "\n");
-                return null;
-                
-            }
+            case "draft":
+            case "DRAFT":
+                DraftTroops();
+                break;
+            case "raise":
+            case "RAISE":
+                RaiseTaxes(); 
+                break;
+            case "buy":
+            case "BUY":
+                BuyTroops();
+                break;
+            case "lower":                    
+                LowerTaxes();
+                break;
+            default:
+                Console.WriteLine("Invalid input, try again.");
+                Thread.Sleep(2000);
+                Console.Clear();
+                TurnPrompt();
+                break;
             
-        }
-
-
-        public static int Draft(int troops)
-        {
-
-            Random troopNum = new Random(); //creating a new instance of the RNG class named troopNum
-            Console.Write("\nBecause you drafted, you pay no money but the number of troops you get are random.\n");
-            int addTroops = troopNum.Next(0, 11); //picking a random number of 1-10
-            troops = troops + addTroops; //setting the troops variable to the old amount plus the new draftees.
-            return troops; //returning the new troops value to Main()
-
-        }
-
-        public static int TaxCollection(int resources, int doubled, int bonus)
-        {
-
-            Random tax = new Random(); //new rng class instance named tax
-            int taxAdd = tax.Next(1, 21); //setting taxAdd to a random number from 2-20
-            resources = taxAdd * doubled + resources + bonus - 10; //setting resources to the random taxAdd value * doubled (can be 1 or 2) + any income bounus + the current value - 10 (for balance)
-            return resources;
-
+            
         }
     }
 
+    public void LowerTaxes()
+    {
+
+        taxPercentage--;
+        Console.WriteLine("You lowered taxes by 1%!");
+
+    }
+
+
+    public void BuyTroops()
+    {
+
+        Console.WriteLine("You can buy troops for 1 money each, how many would you like to buy? You have " + money + " money available.\n[TROOPS TO BE BOUGHT]: ");
+        int troopsToBuy = Convert.ToInt32(Console.ReadLine());
+        if (troopsToBuy > money)
+        {
+            Console.WriteLine("You don't have enough money to buy that many troops!");
+            Thread.Sleep(2000);
+            Console.Clear();
+            BuyTroops();
+        }
+        else
+        {
+            money -= troopsToBuy;
+            troopCount += troopsToBuy;
+            Console.WriteLine("You bought " + troopsToBuy + " troops!");
+        }
+
+    }
+    
+    public void DraftTroops()
+    {
+        
+        Random rngTroops = new Random();
+        int addTroops = rngTroops.Next(2, 7);
+        troopCount += addTroops;
+        Console.WriteLine("You drafted " + addTroops + " troops!");
+        
+    }
+
+    public void RaiseTaxes()
+    {
+
+        taxPercentage++;
+        Console.WriteLine("You raised taxes by 1%!");
+
+    }
+    
+    public static void DisplayRules()
+    {
+        
+        Console.WriteLine("Welcome to World War Bass!\n");
+        Console.WriteLine("The rules for World War Bass are simple:");
+        Console.WriteLine("1. You are a country (of your choice) fighting in a war that may or may not happen, depending on what you do.");
+        Console.WriteLine("2. You can pick an action to do, (these will be listed later)");
+        Console.WriteLine("3. After 2, you can pick to attack or defend your country.");
+        Console.WriteLine("4. Then it will be the enemy countries' turn");
+        Console.WriteLine("5. You also have a Domestic hate factor, which decides if your troops will accept your orders or not.");
+        Console.WriteLine("The goal of the game is to control all the world!");
+        Console.WriteLine("Alright, let's begin! (If you need to review these rules, type RULES when prompted.)");
+        
+    }
+    
+    
+}
+
+
+
+class MainLogic
+{
+    
+    
+    
+    public static void Main()
+    {
+       
+       Game.DisplayRules();
+       Console.WriteLine("\nPress Any key when you are ready to continue.");
+       Console.ReadKey();
+       Console.Clear();
+       Game playerGame = new Game();
+       GetCountry(playerGame);
+       Game.troopCount = Game.countryTroopArray[playerGame.countryNumber];
+       Console.WriteLine("You are the leader of the country " + playerGame.countryPicked + "! You currently have " + Game.troopCount + " troops!");
+       Console.WriteLine("But, when your enemies are choosing who to attack, you have a " + playerGame.hateFactor + "/5 chance to get picked.");
+       Console.WriteLine("Now, onto your first turn!");
+       Console.WriteLine("\nPress any key to continue.");
+       Console.ReadKey();
+       Console.Clear();
+       playerGame.TurnPrompt();
+       playerGame.AttackPrompt(playerGame);
+ 
+    }   
+    
+    
+    public static void GetCountry(Game game)
+    {
+        foreach (string i in Game.countryArray)
+       {
+           
+           Console.WriteLine(i);
+           
+       }
+       Console.Write("Pick your country [Exactly as written above]: ");
+       string pickedCountry = Console.ReadLine();
+        
+        switch (pickedCountry)
+        {
+           case "United States":
+           case "united states":
+            game.Initialize(pickedCountry);
+            Game.troopCount = Game.countryTroopArray[0];
+            Game.countryTroopArray = RemoveIndices(Game.countryTroopArray, 0);
+            game.countryNumber = 0;
+            game.hateFactor = 1;
+            break;
+           case "United Kingdom":
+           case "united kingdom":
+            game.Initialize(pickedCountry);
+            Game.troopCount = Game.countryTroopArray[1];
+            Game.countryTroopArray = RemoveIndices(Game.countryTroopArray, 1);
+            game.countryNumber = 1;
+            game.hateFactor = 1;
+            break;
+           case "Russia":
+           case "russia":
+            game.Initialize(pickedCountry);
+            Game.troopCount = Game.countryTroopArray[2];
+            Game.countryTroopArray = RemoveIndices(Game.countryTroopArray, 2);
+            game.countryNumber = 2;
+            game.hateFactor = 3;
+            break;
+           case "France":
+           case "france":
+            game.Initialize(pickedCountry);
+            Game.troopCount = Game.countryTroopArray[3];
+            Game.countryTroopArray = RemoveIndices(Game.countryTroopArray, 3);
+            game.countryNumber = 3;
+            game.hateFactor = 2;
+            break;
+           default:
+            Console.WriteLine("Invalid country, try again.");
+            Thread.Sleep(2000);
+            Console.Clear();
+            Console.Clear();
+            GetCountry(game);
+            break;
+         
+       }
+       
+        
+    }
+    
+    public static int[] RemoveIndices(int[] IndicesArray, int RemoveAt) //thank you internet (i didnt write this method)
+    {
+        int[] newIndicesArray = new int[IndicesArray.Length - 1];
+        
+        int i = 0;
+        int j = 0;
+        while (i < IndicesArray.Length)
+        {
+            if (i != RemoveAt)
+            {
+                newIndicesArray[j] = IndicesArray[i];
+                j++;
+            } else if (i == RemoveAt)
+            {
+                
+                
+                
+            }
+            
+            i++;
+        }
+            
+        return newIndicesArray;
+    }
 }
