@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 
-//This game idea and the code are (c) Kyle Garzon 2022 / 2023
+//This game idea and the code are (c) Gammer0909 2022 / 2023
 
 /*
  * This program was used to teach myself Object-Oriented Design principles, or SOLID
