@@ -1,3 +1,6 @@
+// This code is a LEGACY version of the game, and is not used in the current version.
+// Version: L0.0.1 (Not Working)
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
