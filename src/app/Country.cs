@@ -52,6 +52,54 @@ public class Country {
     }
 
     /// <summary>
+    /// Attack the given country.
+    /// </summary>
+    /// <param name="countryToAttack">the country that we should attack</param>
+    public bool Attack(Country countryToAttack) {
+
+        if (this._troopCount > countryToAttack.GetTroopCount()) {
+            this._troopCount -= countryToAttack.GetTroopCount();
+        } else if (this._troopCount == countryToAttack.GetTroopCount()) {
+            this._troopCount = 0;
+        } else {
+            return false;
+        }
+
+    }
+
+    /// <summary>
+    /// A method to add money to the money count.
+    /// </summary>
+    /// <param name="amount">the amount to add to the money count</param>
+    public void AddMoney(int amount) {
+        this._money += amount;
+    }
+
+    /// <summary>
+    /// A method to add troops to the troopcount.
+    /// </summary>
+    /// <param name="amount">the amount of troops to add to the troopcount</param>
+    public void AddTroops(int amount) {
+        this._troopCount += amount;
+    }
+
+    /// <summary>
+    /// A method to get the amount of money the country has.
+    /// </summary>
+    /// <returns>The amount of money the country has.</returns>
+    public int GetMoney() {
+        return this._money;
+    }
+
+    /// <summary>
+    /// The method to get the amount of troops the country has.
+    /// </summary>
+    /// <returns>The amount of troops the country has.</returns>
+    public int GetTroopCount() {
+        return this._troopCount;
+    }
+
+    /// <summary>
     ///  The method to get the amount of troops the country has.
     /// </summary>
     /// <returns>The CountryName of this</returns>
