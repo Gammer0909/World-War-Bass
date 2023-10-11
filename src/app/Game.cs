@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using WorldWarBass.Game.State;
 
-namespace WorldWarBass.Game;
+namespace WorldWarBass.Abstraction;
 
 // The Whole idea behind this is that the client extends it, puts some things in there and can run it.
 public class Game {
@@ -21,7 +22,7 @@ public class Game {
     /// <summary>
     /// The start method, called when the game starts, used to initialize the game state.
     /// </summary>
-    public abstract void Start() {
+    public virtual void Start() {
 
         // Nothing to do currently
         while (this._isRunning) {
@@ -33,7 +34,7 @@ public class Game {
 
     }
 
-    public abstract void Update() {
+    public virtual void Update() {
 
         // Nothing to do currently
 

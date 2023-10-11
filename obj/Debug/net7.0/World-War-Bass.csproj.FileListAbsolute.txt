@@ -1,0 +1,5 @@
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.csproj.AssemblyReference.cache
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.AssemblyInfoInputs.cache
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.AssemblyInfo.cs
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.csproj.CoreCompileInputs.cache

@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using WorldWarBass.Game.CountryAbstractions;
 
-namespace WorldWarBass.Game.CountryAbstractions;
+namespace WorldWarBass.CountryAbstractions;
+
 // Woohoo for abstraction!
 /// <summary>
 /// An Abstraction for the Player's country, to easier manage the player's country, like allies and enemies, etc.
@@ -42,5 +43,6 @@ public class PlayerCountry : Country {
         if (this._alliedCountries == null) {
             this._alliedCountries = new List<Country>();
         }
+        
     }
 }

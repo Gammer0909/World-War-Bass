@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WorldWarBass.Game.CountryAbstractions;
 
-namespace WorldWarBass.Game.GameState;
+namespace WorldWarBass.State;
 
 /// <summary>
 ///  The game state class, a data abstraction to represent the state of the game.
