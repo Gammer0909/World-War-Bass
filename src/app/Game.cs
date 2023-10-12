@@ -5,7 +5,7 @@ using WorldWarBass.State;
 namespace WorldWarBass.Abstraction;
 
 // The Whole idea behind this is that the client extends it, puts some things in there and can run it.
-public class Game {
+public abstract class Game {
 
     protected GameState _gameState;
     protected bool _isRunning = false;
@@ -22,22 +22,11 @@ public class Game {
     /// <summary>
     /// The start method, called when the game starts, used to initialize the game state.
     /// </summary>
-    public virtual void Start() {
+    public abstract void Start();
 
-        // Nothing to do currently
-        while (this._isRunning) {
-
-            // Update the game state
-            this.Update();
-
-        }
-
-    }
-
-    public virtual void Update() {
-
-        // Nothing to do currently
-
-    }
+    /// <summary>
+    /// Called inbetween every action, updates the game state
+    /// </summary>
+    public abstract void Update(); 
 
 }

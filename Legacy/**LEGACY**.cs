@@ -18,6 +18,8 @@ using System.Threading;
 
 //This is a refactor (MAJOR REFACTOR) of a project for my 5th hour
 
+namespace WorldWarBass.Legacy;
+
 class Game
 {   
     public string countryPicked;

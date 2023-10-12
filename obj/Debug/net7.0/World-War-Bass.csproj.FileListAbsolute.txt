@@ -3,3 +3,13 @@
 /workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.AssemblyInfoInputs.cache
 /workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.AssemblyInfo.cs
 /workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.csproj.CoreCompileInputs.cache
+/workspaces/World-War-Bass/bin/Debug/net7.0/World-War-Bass
+/workspaces/World-War-Bass/bin/Debug/net7.0/World-War-Bass.deps.json
+/workspaces/World-War-Bass/bin/Debug/net7.0/World-War-Bass.runtimeconfig.json
+/workspaces/World-War-Bass/bin/Debug/net7.0/World-War-Bass.dll
+/workspaces/World-War-Bass/bin/Debug/net7.0/World-War-Bass.pdb
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.dll
+/workspaces/World-War-Bass/obj/Debug/net7.0/refint/World-War-Bass.dll
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.pdb
+/workspaces/World-War-Bass/obj/Debug/net7.0/World-War-Bass.genruntimeconfig.cache
+/workspaces/World-War-Bass/obj/Debug/net7.0/ref/World-War-Bass.dll
