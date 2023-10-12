@@ -185,5 +185,6 @@ public enum CountryName {
     UnitedKingdom,
     France,
     Germany,
-    Russia
+    Russia,
+    NULL
 };
