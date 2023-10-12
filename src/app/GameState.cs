@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WorldWarBass.Game.CountryAbstractions;
+using WorldWarBass.CountryAbstractions;
+using WorldWarBass.State;
 
 namespace WorldWarBass.State;
 
@@ -9,6 +10,10 @@ namespace WorldWarBass.State;
 ///  The game state class, a data abstraction to represent the state of the game.
 /// </summary>
 public class GameState {
+
+    public bool hasLost = false;
+    public bool hasWon = false;
+
 
     private PlayerCountry _playerCountry;
 

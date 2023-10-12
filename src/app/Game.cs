@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using WorldWarBass.Game.State;
+using WorldWarBass.State;
 
 namespace WorldWarBass.Abstraction;
 
 // The Whole idea behind this is that the client extends it, puts some things in there and can run it.
 public class Game {
 
-    GameState _gameState;
-    bool _isRunning = false;
+    protected GameState _gameState;
+    protected bool _isRunning = false;
 
     /// <summary>
     /// The constructor for the game, takes a game state as a parameter.

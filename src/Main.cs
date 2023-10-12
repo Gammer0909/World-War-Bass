@@ -8,11 +8,12 @@ using WorldWarBass.State;
 
 namespace WorldWarBass.Main;
 
-public class WorldWarBassGame : Game {
 
-    public static void Main(string[] args) {
+/// <summary>
+/// The main class, the entry point for the game.
+/// </summary>
+class WorldWarBassGame : Game {
 
-        Console.WriteLine("Hello World");
-    }
+    
 
 }

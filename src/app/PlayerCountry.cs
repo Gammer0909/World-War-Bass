@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using WorldWarBass.Game.CountryAbstractions;
+using WorldWarBass.CountryAbstractions;
 
 namespace WorldWarBass.CountryAbstractions;
 
@@ -14,11 +14,6 @@ public class PlayerCountry : Country {
     /// The list of countries that are opposing the player's country.
     /// </summary>
     private List<Country> _opposingCountries;
-    
-    /// <summary>
-    /// The list of countries that are allied with the player's country.
-    /// </summary>
-    private List<Country> _alliedCountries;
 
     public PlayerCountry(CountryName name) : base(name) {
 

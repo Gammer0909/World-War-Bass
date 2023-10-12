@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace WorldWarBass.Game.CountryAbstractions;
+namespace WorldWarBass.CountryAbstractions;
 
 /// <summary>
 ///  The country class, a data abstraction to represent the countries in the game.
 /// </summary>
 public class Country {
+
+    /// <summary>
+    /// The list of countries that are allied with this country.
+    /// </summary>
+    public List<Country> _alliedCountries { get; set; }
 
     /// <summary>
     /// The name of the country.
@@ -23,7 +28,14 @@ public class Country {
     /// </summary>
     private int _money = 0;
 
+    /// <summary>
+    /// Creates a new country with the given name.
+    /// </summary>
+    /// <param name="name">The countryname of the country.</param>
     public Country(CountryName name) {
+        if (this._alliedCountries == null) {
+            this._alliedCountries = new List<Country>();
+        }
         this._name = name;
         switch (this._name) {
             case CountryName.UnitedStates:
@@ -52,19 +64,58 @@ public class Country {
     }
 
     /// <summary>
-    /// Attack the given country.
+    /// Adds an ally to the ally list.
     /// </summary>
-    /// <param name="countryToAttack">the country that we should attack</param>
-    public bool Attack(Country countryToAttack) {
+    /// <param name="countryToAdd">the country to add to the ally list</param>
+    public void AddAlly(Country countryToAdd) {
+        this._alliedCountries.Add(countryToAdd);
+    }
 
-        if (this._troopCount > countryToAttack.GetTroopCount()) {
-            this._troopCount -= countryToAttack.GetTroopCount();
-        } else if (this._troopCount == countryToAttack.GetTroopCount()) {
-            this._troopCount = 0;
+    /// <summary>
+    /// Checks if an attack can happen on the given country.
+    /// </summary>
+    /// <param name="countryToAttack">the country that we should see if we can attack</param>
+    public bool CanAttack(Country countryToAttack) {
+
+        if (this._troopCount >= countryToAttack.GetTroopCount()) {
+            return true;
         } else {
             return false;
         }
 
+    }
+
+    public void Attack(Country countryToAttack) {
+        if (this.CanAttack(countryToAttack)) {
+            int previousTroopCount = this._troopCount;
+            this._troopCount -= countryToAttack.GetTroopCount();
+            countryToAttack.RemoveTroops(previousTroopCount);
+            // Also substract the opponents troops
+            
+        }
+    }
+
+    /// <summary>
+    /// Checks if the country is allied with the given country.
+    /// </summary>
+    /// <param name="countryToCheck">the country to check if it is allied with this country</param>
+    public bool IsAlliedWith(Country countryToCheck) {
+        if (this._alliedCountries.Contains(countryToCheck)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Checks if the country is destroyed.
+    /// </summary>
+    public bool IsDestroyed() {
+        if (this._troopCount <= 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /// <summary>
@@ -76,11 +127,27 @@ public class Country {
     }
 
     /// <summary>
-    /// A method to add troops to the troopcount.
+    /// Removes money from the money count.
+    /// </summary>
+    /// <param name="amount"></param>
+    public void RemoveMoney(int amount) {
+        this._money -= amount;
+    }
+
+    /// <summary>
+    /// Adds troops to the troopcount.
     /// </summary>
     /// <param name="amount">the amount of troops to add to the troopcount</param>
     public void AddTroops(int amount) {
         this._troopCount += amount;
+    }
+
+    /// <summary>
+    /// Removes troops from the troopcount.
+    /// </summary>
+    /// <param name="amount"></param>
+    public void RemoveTroops(int amount) {
+        this._money -= amount;
     }
 
     /// <summary>
@@ -92,7 +159,7 @@ public class Country {
     }
 
     /// <summary>
-    /// The method to get the amount of troops the country has.
+    /// Gets the amount of troops the country has.
     /// </summary>
     /// <returns>The amount of troops the country has.</returns>
     public int GetTroopCount() {
@@ -100,7 +167,7 @@ public class Country {
     }
 
     /// <summary>
-    ///  The method to get the amount of troops the country has.
+    /// Gets the CountryName of this.
     /// </summary>
     /// <returns>The CountryName of this</returns>
     public CountryName GetName() {
