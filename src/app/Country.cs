@@ -90,8 +90,6 @@ public class Country {
             int previousTroopCount = this._troopCount;
             this._troopCount -= countryToAttack.GetTroopCount();
             countryToAttack.RemoveTroops(previousTroopCount);
-            // Also substract the opponents troops
-            
         }
     }
 
@@ -172,6 +170,10 @@ public class Country {
     /// <returns>The CountryName of this</returns>
     public CountryName GetName() {
         return this._name;
+    }
+
+    public List<Country> GetOpposingCountries() {
+        return this._alliedCountries;
     }
 
 }

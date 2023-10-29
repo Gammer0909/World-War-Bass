@@ -1,22 +1,22 @@
 // This code is a LEGACY version of the game, and is not used in the current version.
 // Version: L0.0.1 (Not Working)
 
+/*
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 
+
 //This game idea and the code are (c) Gammer0909 2022 / 2023
 
-/*
- * This program was used to teach myself Object-Oriented Design principles, or SOLID
- * (https://en.wikipedia.org/wiki/SOLID) as well as how to properly make a functioning program/application with
- * with OOP principles.
- * If you wish to use this as an example or teach with it, contact me on GitHub @Gammer0909
- *
- */
 
-//This is a refactor (MAJOR REFACTOR) of a project for my 5th hour
+// This program was used to teach myself Object-Oriented Design principles, or SOLID
+// (https://en.wikipedia.org/wiki/SOLID) as well as how to properly make a functioning program/application with
+// with OOP principles.
+// If you wish to use this as an example or teach with it, contact me on GitHub @Gammer0909
+
+//This is a refactor (MAJOR REFACTOR) of a project for my 5th hour (Turns out, this code was also garbage, and I'm rewriting it AGAIN)
 
 namespace WorldWarBass.Legacy;
 
@@ -443,3 +443,4 @@ class MainLogic
         return newIndicesArray;
     }
 }
+*/

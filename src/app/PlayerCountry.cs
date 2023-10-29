@@ -28,7 +28,7 @@ public class PlayerCountry : Country {
         }
 
         // Make sure the player's country isn't in the opposing countries list
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < _opposingCountries.Count; i++) {
             if (this._opposingCountries[i].GetName() == this.GetName()) {
                 this._opposingCountries.RemoveAt(i); // Remove the player's country from the opposing countries list
             }
