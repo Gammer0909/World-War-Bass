@@ -25,7 +25,7 @@ public struct AttackInfo {
     /// </summary>
     /// <param name="countryToAttack">The country that is attacking.</param>
     /// <param name="playerCountry">The country that is being attacked.</param>
-    /// <param name="isSuccessful">Does the attack succeed?</param>
+    /// <param name="isSuccessful">Does the attack succeed?</param>);
     public AttackInfo(Country countryToAttack, PlayerCountry playerCountry, bool isSuccessful) {
         this._countryToAttack = countryToAttack;
         this._playerCountry = playerCountry;

@@ -25,13 +25,14 @@ public class WorldWarBass : Game {
     /// <param name="gameState">The GameState for the new game.</param>
     public WorldWarBass(GameState gameState) : base(gameState) {
 
-        commandNames = new Dictionary<string, string>();
-
-        commandNames.Add("ATTACK", "Attacks a country of your choosing.");
-        commandNames.Add("INVITE", "Invites a country of your choosing to join your alliance.");
-        commandNames.Add("RULES", "Displays the rules of the game.");
-        commandNames.Add("HELP", "Displays the commands you can use.");
-        commandNames.Add("QUIT", "Quits the game.");
+        commandNames = new Dictionary<string, string>
+        {
+            { "ATTACK", "Attacks a country of your choosing." },
+            { "INVITE", "Invites a country of your choosing to join your alliance." },
+            { "RULES", "Displays the rules of the game." },
+            { "HELP", "Displays the commands you can use." },
+            { "QUIT", "Quits the game." }
+        };
 
     }
 
@@ -102,9 +103,6 @@ public class WorldWarBass : Game {
     /// </summary>
     /// <returns>the command that the user entered as a string.</returns>
     private string? GetCommand() {
-        foreach (Country country in this._gameState.GetPlayerCountry().GetOpposingCountries()) {
-            Console.WriteLine(country.GetName);
-        }
         string? command = Console.ReadLine();
         if (command == null) {
             Console.WriteLine("Invalid command. Please try again.");
@@ -124,13 +122,10 @@ public class WorldWarBass : Game {
     /// <returns>A new AttackInfo struct with the Country the player wishes to attack, and if the attack is successful.</returns>
     private AttackInfo GetAttackInfo() {
         Console.WriteLine($"Which apposing country would you like to attack?");
-        foreach (Country country in this._gameState.GetPlayerCountry().GetOpposingCountries()) {
-            Console.WriteLine(country.GetName());
-        }
         string? countryToAttack = Console.ReadLine();
-        if (countryToAttack == null || countryToAttack == "" || !this._gameState.GetPlayerCountry().GetOpposingCountries().Contains(new Country(this.ConvertStringToCountryName(countryToAttack))) ) {
-            Console.WriteLine("Invalid country name. Please try again.");
-            return GetAttackInfo();
+        if (countryToAttack == null) {
+            Console.WriteLine("Null country name. Please try again.");
+            GetAttackInfo();
         }
         return new AttackInfo(new Country(this.ConvertStringToCountryName(countryToAttack)), this._gameState.GetPlayerCountry(), this._gameState.GetPlayerCountry().CanAttack(new Country(this.ConvertStringToCountryName(countryToAttack))));
     }
@@ -172,25 +167,29 @@ public static class Client {
             
             Console.WriteLine("Welcome to World War Bass!");
             Console.Write("Before we get started, what country are you playing as?\nUnited States\nUnited Kingdom\nFrance\nGermany\nRussia\nType the name of the country you want to play as: ");
-            PickCountryName();
+            CountryName picked = PickCountryName();
 
             Console.Write("One last thing before getting started, if you want to see the rules, type \"RULES\", otherwise, type \"START\" to start the game.\n[START or RULES]:");
             // I should pull this into a method, however I want the actual prompt method to be all purpose, not just start and rules.
             string? startOrRules = Console.ReadLine();
             while (startOrRules != "START") {
-                Console.Write("Invalid Input, please try again.\n[START or RULES]:");
-                startOrRules = Console.ReadLine();
                 if (startOrRules == "START") {
                     break;
                 }
                 if (startOrRules.ToUpper() == "RULES") {
-                    Console.WriteLine("RULES:\n\nThe goal of the game is to conquer the world. You do this by conquering other countries.\nYou can conquer other countries by invading them, or by having them surrender to you.\nYou can invade a country by attacking it, and then invading it.\nYou can attack a country by sending troops to attack it.\nYou can send troops to attack a country by sending troops to the border of the country you want to attack.\nYou can send troops to the border of a country by sending troops to the border of the country you want to attack.\nYou can send troops to the border of a country by sending troops to the border of the country you want to attack.\nYou can send troops to the border of a country by sending troops to the border of the country you want to attack.\nYou can send troops to the border of a country by sending troops to the border of the country you want to attack.\n\n");
+                    Console.WriteLine("RULES:\n\nThe goal of the game is to conquer the world. You do this by conquering other countries.\nYou can conquer other countries by invading them, and removing all of their troops.");
                 }
+                if (startOrRules == null) {
+                    Console.WriteLine("Invalid input. Please try again.");
+                }
+                Console.Write("[START or RULES] :");
+                startOrRules = Console.ReadLine();
+                
             }
             Console.WriteLine("Starting game, good luck conquerer!");
 
-
-            new WorldWarBass(new GameState(CountryName.UnitedStates)).Start();
+            Console.Clear();
+            new WorldWarBass(new GameState(picked)).Start();
 
         }
 
@@ -198,7 +197,7 @@ public static class Client {
         /// <summary>
         /// Recursively asks the user for a country name until they give a valid one.
         /// </summary>
-        /// <returns>the CountryName based off of what they typed in as a string.</returns>
+        /// <returns>the CountryName based off of what the player typed in as a string.</returns>
         public static CountryName PickCountryName() {
             string? countryNameStr = Console.ReadLine();
             if (countryNameStr == null) {
