@@ -102,6 +102,9 @@ public class WorldWarBass : Game {
     /// </summary>
     /// <returns>the command that the user entered as a string.</returns>
     private string? GetCommand() {
+        foreach (Country country in this._gameState.GetPlayerCountry().GetOpposingCountries()) {
+            Console.WriteLine(country.GetName);
+        }
         string? command = Console.ReadLine();
         if (command == null) {
             Console.WriteLine("Invalid command. Please try again.");

@@ -63,6 +63,10 @@ public class Country {
         }
     }
 
+    public CountryName GetCountryName() {
+        return this._name;
+    }
+
     /// <summary>
     /// Adds an ally to the ally list.
     /// </summary>
@@ -175,6 +179,7 @@ public class Country {
     public List<Country> GetOpposingCountries() {
         return this._alliedCountries;
     }
+
 
 }
 
