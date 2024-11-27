@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "gbbe3sclvxfCQ4ZTqguHVtyr1dX5txmLG0CIENv2fT1sJvddQUiAzWepLVjg6Kso91tXqKtexAU0PytVET5Miw==",
+  "dgSpecHash": "HvS4bAU5vM4GOd69CK3cfcvLInJe9dhWo+NUip8bdnIBEz4ezIyIkpFXPsjbPdMfc8KLdc1qEU9qNcjGaGoQ5g==",
   "success": true,
-  "projectFilePath": "/workspaces/World-War-Bass/World-War-Bass.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/kyle-garzon/Desktop/World-War-Bass/World-War-Bass.csproj",
+  "expectedPackageFiles": [
+    "/home/kyle-garzon/.nuget/packages/spectre.console/0.49.1/spectre.console.0.49.1.nupkg.sha512"
+  ],
   "logs": []
 }

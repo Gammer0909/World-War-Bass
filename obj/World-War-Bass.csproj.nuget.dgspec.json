@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/World-War-Bass/World-War-Bass.csproj": {}
+    "/home/kyle-garzon/Desktop/World-War-Bass/World-War-Bass.csproj": {}
   },
   "projects": {
-    "/workspaces/World-War-Bass/World-War-Bass.csproj": {
+    "/home/kyle-garzon/Desktop/World-War-Bass/World-War-Bass.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/World-War-Bass/World-War-Bass.csproj",
+        "projectUniqueName": "/home/kyle-garzon/Desktop/World-War-Bass/World-War-Bass.csproj",
         "projectName": "World-War-Bass",
-        "projectPath": "/workspaces/World-War-Bass/World-War-Bass.csproj",
-        "packagesPath": "/home/codespace/.nuget/packages/",
-        "outputPath": "/workspaces/World-War-Bass/obj/",
+        "projectPath": "/home/kyle-garzon/Desktop/World-War-Bass/World-War-Bass.csproj",
+        "packagesPath": "/home/kyle-garzon/.nuget/packages/",
+        "outputPath": "/home/kyle-garzon/Desktop/World-War-Bass/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/codespace/.nuget/NuGet/NuGet.Config"
+          "/home/kyle-garzon/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -35,8 +35,14 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.49.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/dotnet/7.0.306/sdk/7.0.306/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
