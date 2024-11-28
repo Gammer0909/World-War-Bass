@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("World-War-Bass")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f9e7e5fb7c972fc8f36533661923e53993d284b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71b1c41de0cff88f3289a33f9fec86db720c4a53")]
 [assembly: System.Reflection.AssemblyProductAttribute("World-War-Bass")]
 [assembly: System.Reflection.AssemblyTitleAttribute("World-War-Bass")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
